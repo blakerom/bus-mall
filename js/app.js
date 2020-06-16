@@ -18,7 +18,7 @@
 //3. display list of products by votes received and # of times seen 'Banna slicer had 3 votes and was hsown 5 times'.
 var productCollection = [];
 var totalClicks = 0;
-var maxClicks = 5;
+var maxClicks = 25;
 
 function Product(source, description, name){
   this.clicked = 0;
