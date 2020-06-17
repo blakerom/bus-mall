@@ -3,7 +3,6 @@
 Product.collection = [];
 var totalClicks = 0;
 var maxClicks = 25;
-
 //=================Objects==================//
 var bathProduct = new Product('images/bathroom.jpg', 'iPad while you iPoo', 'Bathroom iPad Multitool');
 var petSweeperProduct = new Product('images/pet-sweep.jpg', 'Put your pets to work as they run around your house with snap on sweepers.', 'Pet Sweeper');
