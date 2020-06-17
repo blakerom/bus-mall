@@ -52,6 +52,22 @@ div li {
   background-color: #4E5757;
   color: #DEDED4;
 }
+canvas {
+  transition: ease-in 2s;
+  animation: fade-in 2s;
+  display: none;
+  width: 960px;
+  height: 680px;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    display: block;
+    opacity: 1;
+  }
+}
 /* section:first-of-type > p {
   margin: 0 30px;
   position: absolute;
