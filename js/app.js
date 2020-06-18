@@ -2,7 +2,7 @@
 //=================Globals===================//
 Product.collection = [];
 var totalClicks = 0;
-var maxClicks = 5;
+var maxClicks = 25;
 
 //=================Objects==================//
 var bathProduct = new Product('images/bathroom.jpg', 'iPad while you iPoo', 'Bathroom iPad Multitool');
@@ -11,20 +11,20 @@ var pizzaScizzorsProduct = new Product('images/scissors.jpg', 'Cut your pizza an
 var tauntaunProduct = new Product('images/tauntaun.jpg', 'Always wanted to survive the cold perils of Hoth? Now you can!', 'Tauntaun Sleeper');
 var bagR2Product = new Product('images/bag.jpg','R2D2 is your personal suitcase', 'R2 Rollcase');
 var bananaProduct = new Product('images/banana.jpg', 'Cut your bananas perfectly!', 'Banana cut');
-// var bootsProduct = new Product('images/boots.jpg', 'Rain boots too sweaty? Try Rain Boats!', 'Rain Boats');
-// var breakfastProduct = new Product('images/breakfast.jpg', 'Make your entire breakfast with just one handy tool', 'Breakfast Machine');
-// var bubblegumProduct = new Product('images/bubblegum.jpg', 'Meatball flavored bubble gum! It\'s protein!', 'MeatGum');
-// var chairProduct = new Product('images/chair.jpg', 'Take a seat, it\'s relaxing!', 'Cozy Chair');
-// var cthulhuProduct = new Product('images/cthulhu.jpg', 'This toy is only for the brave.', 'Cthulu Toy');
-// var dogDuckProduct = new Product('images/dog-duck.jpg', 'Loud, yappy dog? This device turns the annoy into, oh boy!', 'Duck Dog Device');
-// var dragonProduct = new Product('images/dragon.jpg', 'Dragon meat. It is also protein!', 'Dragon Meat');
-// var penProduct = new Product('images/pen.jpg', 'Work during lunch? Be efficient.', 'Pen plastic ware');
-// var sharkProduct = new Product('images/shark.jpg', 'This cute sleeping bag is sure to impress.', 'Shark Sleeper');
-// var sweepProduct = new Product('images/sweep.png', 'Baby can\'t wait to work? Let them sweep.', 'Baby Sweeper');
-// var unicornProduct = new Product('images/unicorn.jpg', 'Unicorn meat...It\'s protein.', 'Unicorn Meat');
-// var usbProduct = new Product('images/usb.gif', 'Tentacle usb moves when in use.', 'Tentacle USB');
-// var watercanProduct = new Product('images/water-can.jpg', 'Never run out of water with this can,', 'Watercan');
-// var wineglassProduct = new Product('images/wine-glass.jpg', 'Perfect oxygenation in every glass.', 'Wineglass');
+var bootsProduct = new Product('images/boots.jpg', 'Rain boots too sweaty? Try Rain Boats!', 'Rain Boats');
+var breakfastProduct = new Product('images/breakfast.jpg', 'Make your entire breakfast with just one handy tool', 'Breakfast Machine');
+var bubblegumProduct = new Product('images/bubblegum.jpg', 'Meatball flavored bubble gum! It\'s protein!', 'MeatGum');
+var chairProduct = new Product('images/chair.jpg', 'Take a seat, it\'s relaxing!', 'Cozy Chair');
+var cthulhuProduct = new Product('images/cthulhu.jpg', 'This toy is only for the brave.', 'Cthulu Toy');
+var dogDuckProduct = new Product('images/dog-duck.jpg', 'Loud, yappy dog? This device turns the annoy into, oh boy!', 'Duck Dog Device');
+var dragonProduct = new Product('images/dragon.jpg', 'Dragon meat. It is also protein!', 'Dragon Meat');
+var penProduct = new Product('images/pen.jpg', 'Work during lunch? Be efficient.', 'Pen plastic ware');
+var sharkProduct = new Product('images/shark.jpg', 'This cute sleeping bag is sure to impress.', 'Shark Sleeper');
+var sweepProduct = new Product('images/sweep.png', 'Baby can\'t wait to work? Let them sweep.', 'Baby Sweeper');
+var unicornProduct = new Product('images/unicorn.jpg', 'Unicorn meat...It\'s protein.', 'Unicorn Meat');
+var usbProduct = new Product('images/usb.gif', 'Tentacle usb moves when in use.', 'Tentacle USB');
+var watercanProduct = new Product('images/water-can.jpg', 'Never run out of water with this can,', 'Watercan');
+var wineglassProduct = new Product('images/wine-glass.jpg', 'Perfect oxygenation in every glass.', 'Wineglass');
 
 var stringyProductsFromStorage = localStorage.getItem('storedProducts');
 var productsFromStorage = JSON.parse(stringyProductsFromStorage);
@@ -92,14 +92,24 @@ function rerenderProductSelection(){
   var secondRandom = randomProduct(0, Product.collection.length);
   var thirdRandom = randomProduct(0, Product.collection.length);
 
-  while(secondRandom === firstRandom || secondRandom === thirdRandom){
+  do {
+    firstRandom = randomProduct(0, Product.collection.length);
+  } while (firstRandom === secondRandom || firstRandom === thirdRandom);
+
+  do {
     secondRandom = randomProduct(0, Product.collection.length);
-    // console.log('second image ', Product.collection[secondRandom]);
-  }
-  while(thirdRandom === firstRandom || secondRandom === thirdRandom){
+  } while (secondRandom === firstRandom || secondRandom === thirdRandom);
+    
+  do {
     thirdRandom = randomProduct(0, Product.collection.length);
-    // console.log('third image ', Product.collection[thirdRandom]);
-  }
+  } while (thirdRandom === firstRandom || thirdRandom === secondRandom);
+    
+    // console.log('second image ', Product.collection[secondRandom]);
+  // }
+  // while(thirdRandom === firstRandom || secondRandom === thirdRandom){
+  //   thirdRandom = randomProduct(0, Product.collection.length);
+  //   // console.log('third image ', Product.collection[thirdRandom]);
+  // }
 
   var firstImage = document.getElementById('image1');
   var firstText = document.getElementById('text1');
