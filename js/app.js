@@ -3,6 +3,7 @@
 Product.collection = [];
 var totalClicks = 0;
 var maxClicks = 25;
+
 //=================Objects==================//
 var bathProduct = new Product('images/bathroom.jpg', 'iPad while you iPoo', 'Bathroom iPad Multitool');
 var petSweeperProduct = new Product('images/pet-sweep.jpg', 'Put your pets to work as they run around your house with snap on sweepers.', 'Pet Sweeper');
@@ -25,8 +26,15 @@ var usbProduct = new Product('images/usb.gif', 'Tentacle usb moves when in use.'
 var watercanProduct = new Product('images/water-can.jpg', 'Never run out of water with this can,', 'Watercan');
 var wineglassProduct = new Product('images/wine-glass.jpg', 'Perfect oxygenation in every glass.', 'Wineglass');
 
-//=================Functions=================//
+var stringyProductsFromStorage = localStorage.getItem('storedProducts');
+var productsFromStorage = JSON.parse(stringyProductsFromStorage);
+console.log('products from storage: ', productsFromStorage);
 
+if(productsFromStorage){
+  Product.collection = productsFromStorage;
+}
+
+//=================Functions=================//
 function Product(source, description, name){
   this.clicked = 0;
   this.shown = 0;
@@ -61,6 +69,10 @@ function handleImageClick(event){
       createChart();
     }
 
+    var stringyProductCollection = JSON.stringify(Product.collection);
+    // console.log('stringy array',stringyProductCollection);
+    localStorage.setItem('storedProducts', stringyProductCollection);
+
   }
   else
   alert('click on an image to make a selection.');
@@ -80,14 +92,24 @@ function rerenderProductSelection(){
   var secondRandom = randomProduct(0, Product.collection.length);
   var thirdRandom = randomProduct(0, Product.collection.length);
 
-  while(secondRandom === firstRandom || secondRandom === thirdRandom){
+  do {
+    firstRandom = randomProduct(0, Product.collection.length);
+  } while (firstRandom === secondRandom || firstRandom === thirdRandom);
+
+  do {
     secondRandom = randomProduct(0, Product.collection.length);
-    // console.log('second image ', Product.collection[secondRandom]);
-  }
-  while(thirdRandom === firstRandom || secondRandom === thirdRandom){
+  } while (secondRandom === firstRandom || secondRandom === thirdRandom);
+    
+  do {
     thirdRandom = randomProduct(0, Product.collection.length);
-    // console.log('third image ', Product.collection[thirdRandom]);
-  }
+  } while (thirdRandom === firstRandom || thirdRandom === secondRandom);
+    
+    // console.log('second image ', Product.collection[secondRandom]);
+  // }
+  // while(thirdRandom === firstRandom || secondRandom === thirdRandom){
+  //   thirdRandom = randomProduct(0, Product.collection.length);
+  //   // console.log('third image ', Product.collection[thirdRandom]);
+  // }
 
   var firstImage = document.getElementById('image1');
   var firstText = document.getElementById('text1');
@@ -119,22 +141,23 @@ function randomProduct(min, max){
 
 function createChart(){
   var chartNames = [];
-  for(var i = 0; i < Product.collection.length; i++){
-    chartNames.push(Product.collection[i].productName);
-    console.log('chart names :', chartNames);
-  }
-
   var chartProductClicks = [];
-  for(var i = 0; i < Product.collection.length; i++){
-    chartProductClicks.push(Product.collection[i].clicked);
-    console.log('chart clicks :',chartProductClicks);
-  }
-
   var chartProductShown = [];
   for(var i = 0; i < Product.collection.length; i++){
+    chartNames.push(Product.collection[i].productName);
+    chartProductClicks.push(Product.collection[i].clicked);
     chartProductShown.push(Product.collection[i].shown);
-    console.log('chart shown :', chartProductShown);
+    // console.log('chart names :', chartNames);
   }
+  // for(var i = 0; i < Product.collection.length; i++){
+    
+  //   console.log('chart clicks :',chartProductClicks);
+  // }
+
+  // for(var i = 0; i < Product.collection.length; i++){
+    
+  //   console.log('chart shown :', chartProductShown);
+  // }
 
   var ctx = document.getElementById('productChart').getContext('2d');
   var productChart = new Chart(ctx, {
@@ -159,4 +182,22 @@ function createChart(){
     // Configuration options go here
     options: {}
   });
+  // var hexArray = [];
+  // for(var i = 0; i < Product.collection.length; i++){
+  //   var hexKey = '#' + randomProduct(0,9) + randomProduct(0,9) + randomProduct(0,9);
+  //   hexArray = hexKey;
+  //   console.log('hex array', hexArray);
+  // }
+  // var myDoughnutChart = new Chart(ctx, {
+  //   type: 'doughnut',
+
+  //   data: {
+  //     labels: chartNames,
+  //     datasets: [{
+  //       data: chartProductClicks,
+  //       backgroundColor: hexArray
+  //     }]
+  //   },
+  //   options: {}
+  // });
 }
