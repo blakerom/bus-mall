@@ -131,22 +131,26 @@ function randomProduct(min, max){
 
 function createChart(){
   var chartNames = [];
-  for(var i = 0; i < Product.collection.length; i++){
-    chartNames.push(Product.collection[i].productName);
-    console.log('chart names :', chartNames);
-  }
-
   var chartProductClicks = [];
-  for(var i = 0; i < Product.collection.length; i++){
-    chartProductClicks.push(Product.collection[i].clicked);
-    console.log('chart clicks :',chartProductClicks);
-  }
-
   var chartProductShown = [];
   for(var i = 0; i < Product.collection.length; i++){
+    chartNames.push(Product.collection[i].productName);
+    chartProductClicks.push(Product.collection[i].clicked);
     chartProductShown.push(Product.collection[i].shown);
-    console.log('chart shown :', chartProductShown);
+    // console.log('chart names :', chartNames);
   }
+
+  
+  // for(var i = 0; i < Product.collection.length; i++){
+    
+  //   console.log('chart clicks :',chartProductClicks);
+  // }
+
+  
+  // for(var i = 0; i < Product.collection.length; i++){
+    
+  //   console.log('chart shown :', chartProductShown);
+  // }
 
   var ctx = document.getElementById('productChart').getContext('2d');
   var productChart = new Chart(ctx, {
@@ -171,4 +175,22 @@ function createChart(){
     // Configuration options go here
     options: {}
   });
+  // var hexArray = [];
+  // for(var i = 0; i < Product.collection.length; i++){
+  //   var hexKey = '#' + randomProduct(0,9) + randomProduct(0,9) + randomProduct(0,9);
+  //   hexArray = hexKey;
+  //   console.log('hex array', hexArray);
+  // }
+  // var myDoughnutChart = new Chart(ctx, {
+  //   type: 'doughnut',
+
+  //   data: {
+  //     labels: chartNames,
+  //     datasets: [{
+  //       data: chartProductClicks,
+  //       backgroundColor: hexArray
+  //     }]
+  //   },
+  //   options: {}
+  // });
 }
