@@ -149,14 +149,11 @@ function createChart(){
     chartProductShown.push(Product.collection[i].shown);
     // console.log('chart names :', chartNames);
   }
-
-  
   // for(var i = 0; i < Product.collection.length; i++){
     
   //   console.log('chart clicks :',chartProductClicks);
   // }
 
-  
   // for(var i = 0; i < Product.collection.length; i++){
     
   //   console.log('chart shown :', chartProductShown);
