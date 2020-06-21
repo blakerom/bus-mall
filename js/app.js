@@ -111,17 +111,17 @@ function rerenderProductSelection(){
     thirdRandom = randomProduct(0, Product.collection.length);
   } while (thirdRandom === firstRandom || thirdRandom === secondRandom || thirdRandom === firstPrev || thirdRandom === secondPrev || thirdRandom === thirdPrev);
 
-  console.log('random 1',firstRandom);
-  console.log('random 2',secondRandom);
-  console.log('random 3',thirdRandom);
+  // console.log('random 1',firstRandom);
+  // console.log('random 2',secondRandom);
+  // console.log('random 3',thirdRandom);
     
   firstPrev = firstRandom;
   secondPrev = secondRandom;
   thirdPrev = thirdRandom;
 
-  console.log('random 1 Prev',firstPrev);
-  console.log('random 2 Prev',secondPrev);
-  console.log('random 3 Prev',thirdPrev);
+  // console.log('random 1 Prev',firstPrev);
+  // console.log('random 2 Prev',secondPrev);
+  // console.log('random 3 Prev',thirdPrev);
 
   var firstImage = document.getElementById('image1');
   var firstText = document.getElementById('text1');
